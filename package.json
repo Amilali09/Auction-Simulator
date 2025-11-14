@@ -1,0 +1,17 @@
+{
+  "name": "ipl-auction-simulator",
+  "version": "1.0.0",
+  "description": "IPL Auction Simulator with multiplayer support",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.6.1"
+  },
+  "keywords": ["auction", "ipl", "multiplayer"],
+  "author": "",
+  "license": "ISC"
+}
+

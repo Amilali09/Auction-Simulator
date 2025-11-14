@@ -1,0 +1,169 @@
+<!--
+Updated: Fixes requested (reveal hidden details + new color theme + layout tweaks).
+- Viewport still targets MSI Modern 14 (1366×768).
+- Reduced center player image and tightened paddings so right column content is fully visible.
+- Narrowed left column and right column slightly and increased center content flexibility to avoid clipping.
+- Bottom control pill resized and constrained so it doesn't cover right-panel widgets.
+- New color palette: teal → purple gradient for accents and controls (modern, high-contrast on dark background).
+- Note: This is a fully static mock — networking (LAN auction) not implemented as you requested.
+
+Assets:
+- /mnt/data/Screenshot 2025-11-02 203838.png
+- /mnt/data/Screenshot 2025-11-05 153142.png
+- /mnt/data/Screenshot 2025-11-05 162954.png (optional preview screenshot)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IPL Auction — MSI Modern 14 Mock (updated)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Room Join/Create Modal -->
+  <div id="room-modal" class="modal" style="display:flex;">
+    <div class="modal-card" style="max-width:500px;">
+      <div class="modal-header">
+        <div class="title-box">Join Auction Room</div>
+      </div>
+      <div class="modal-body">
+        <div id="room-create-section" style="display:none;">
+          <p style="color:var(--muted); margin-bottom:20px;">Room Code: <strong id="room-code-display" style="color:var(--bright-blue); font-size:24px;">—</strong></p>
+          <p style="color:var(--muted); margin-bottom:20px;">Share this code with other players to join.</p>
+          <div style="margin-bottom:15px;">
+            <label style="color:var(--muted); display:block; margin-bottom:8px;">Your Team Name:</label>
+            <input type="text" id="host-team-name" placeholder="Enter team name" style="width:100%; padding:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff; font-size:14px;">
+          </div>
+          <button id="start-auction-btn" class="btn" style="width:100%; margin-top:10px;">Start Auction</button>
+        </div>
+        <div id="room-join-section">
+          <div style="margin-bottom:15px;">
+            <label style="color:var(--muted); display:block; margin-bottom:8px;">Room Code:</label>
+            <input type="text" id="join-room-code" placeholder="Enter room code" style="width:100%; padding:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff; font-size:14px; text-transform:uppercase;">
+          </div>
+          <div style="margin-bottom:15px;">
+            <label style="color:var(--muted); display:block; margin-bottom:8px;">Your Team Name:</label>
+            <input type="text" id="join-team-name" placeholder="Enter team name" style="width:100%; padding:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#fff; font-size:14px;">
+          </div>
+          <button id="join-room-btn" class="btn" style="width:100%; margin-bottom:10px;">Join Room</button>
+          <button id="create-room-btn" class="btn" style="width:100%; background:rgba(255,255,255,0.1);">Create New Room</button>
+        </div>
+        <div id="room-error" style="color:var(--bright-pink); margin-top:15px; display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="viewport" role="application" aria-label="IPL Auction — MSI Modern 14 mock (updated)">
+    <div class="overlay">
+      <header>
+        <div class="brand"><div class="dot"></div><div style="line-height:1"> <div style="font-size:11px;color:var(--accent-a)" id="room-status">Connecting...</div><div class="title">IPL Auction — Room: <span id="header-room-code">—</span></div></div></div>
+        <div class="topbar">
+          <div class="teams" id="top-teams-container">
+            <!-- Opponent team cards will be dynamically inserted here by app.js -->
+          </div>
+        </div>
+      </header>
+
+      <div class="main">
+        <!-- LEFT -->
+        <div class="panel players">
+          <h2>Players List</h2>
+          <div class="filters"><div class="chip">All</div><div class="chip">WK</div><div class="chip">Batsmen</div><div class="chip">All-Rounder</div><div class="chip">Bowler</div></div>
+          <div id="left-players-list" class="list">
+            <!-- Rendered from PLAYERS_DATA by app.js -->
+          </div>
+        </div>
+
+        <!-- CENTER -->
+        <div class="panel center">
+          <div class="player-preview">
+            <div class="player-img"><img id="center-player-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXd7IOQ0NKyGMznUdvuNfPqT1PjyLLWs2PlA&s" alt="big-player"></div>
+            <div class="player-info">
+              <div class="title-box">Player Details</div>
+              <table class="info-table"><tr><td class="info-label">Player Name -</td><td><strong id="center-player-name">—</strong></td></tr>
+                <tr><td class="info-label">Player Type -</td><td id="center-player-type">—</td></tr>
+                <tr><td class="info-label">Base Price -</td><td id="center-player-base">—</td></tr>
+              </table>
+
+              <div style="height:10px"></div>
+
+              <!-- Bid Details will be dynamically inserted here by JS if needed, or moved to right panel -->
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: ensure full visibility with comfortable padding -->
+        <div class="panel right">
+          <div class="bid-details-right" style="padding:12px; margin-bottom: 12px;">
+            <h3 style="margin:0 0 12px 0;font-family:Merriweather; color:var(--bright-blue)">Bid Details</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="background:var(--glass);padding:10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="color:var(--muted); font-size:14px;">Bidder</span>
+                <strong id="bidder-name" style="color:var(--bright-green); font-size:18px;">—</strong>
+              </div>
+              <div style="background:var(--glass);padding:10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="color:var(--muted); font-size:14px;">Current Bid</span>
+                <strong id="bid-amount" style="color:var(--bright-green); font-size:18px;">—</strong>
+              </div>
+              <div style="background:var(--glass);padding:10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="color:var(--muted); font-size:14px;">Time Left</span>
+                <strong id="bid-timer" style="color:var(--bright-pink); font-size:18px;">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Random Draw Visual -->
+          <div id="draw-visual" class="draw-visual" aria-live="polite">
+            <div class="draw-header">Random Draw</div>
+            <div class="draw-card">
+              <div class="draw-img"><div class="spinner"></div></div>
+              <div class="draw-info">
+                <div class="draw-name muted">Waiting to draw…</div>
+                <div class="draw-type"></div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+      </div>
+
+      <!-- BOTTOM controls -->
+      <div class="bottom">
+        <div class="controls" role="group" aria-label="auction controls">
+          <div class="btn" id="view-team-btn">View Team</div>
+          <div class="btn" id="player-count-display">0</div>
+          <div class="btn" id="purse-display">0.0Cr</div>
+          <div class="btn big">Active Team: <strong id="active-team-name">—</strong></div>
+          <div class="btn circle" id="bid-btn">Bid</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Team Details Modal -->
+  <div id="team-details-modal" class="modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="title-box">Team Details - <span id="modal-team-name"></span></div>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="modal-general-info" class="info-table">
+          <!-- General team info will be dynamically inserted here -->
+        </div>
+        <h3 style="margin-top:20px; color:var(--bright-blue); font-family:Merriweather;">Player Roster by Type</h3>
+        <div id="modal-roster-columns" class="roster-columns">
+          <!-- Player roster columns will be dynamically inserted here by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</html>

@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap");
+
+:root{
+  --bg:#050811; --panel:#081827; --muted:#9fb0c9;
+  --accent-a:#23d9c7; /* teal */
+  --accent-b:#7b5cff; /* purple */
+  --bright-green:#1a6cc5b6; /* neon green */
+  --bright-pink:#FF1493;  /* deep pink */
+  --bright-blue:#14CCFF;  /* sky blue */
+  --glass: rgba(255,255,255,0.02);
+  --dark-Red: rgba(10, 54, 116, 0.774);
+  }
+  
+  *{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);font-family:Montserrat,system-ui,Arial;color:#eaf6ff}
+
+/* Fixed MSI Modern 14 viewport */
+.viewport{width:1366px;height:768px;overflow:hidden;border-radius:6px;position:relative;background:#031020;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+
+/* subtle stadium background image (kept) */
+.viewport::before{content:"";position:absolute;inset:0;background-image:url('https://i.imgur.com/dKx9X0x.png');background-size:cover;background-position:center;opacity:0.28}
+
+.overlay{position:absolute;inset:10px;border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg, rgba(2,8,14,0.72), rgba(2,8,14,0.7));border:1px solid rgba(255,255,255,0.02)}
+
+header{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:12px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent-a);box-shadow:0 0 8px var(--accent-a)}
+.{font-family:Merriweather,serif;font-size:18px}
+
+.topbar{display:flex;gap:12px;align-items:center}
+.teams{display:flex;gap:12px}
+.team{background:linear-gradient(180deg,#08182a,#05111a);padding:10px 14px;border-radius:8px;min-width:170px;border:1px solid rgba(255,255,255,0.03)}
+.team h4{margin:0;font-size:14px}
+.team .meta{display:flex;justify-content:space-between;margin-top:8px;color:var(--muted);font-size:12px}
+
+.team.active{border-color:var(--bright-green); box-shadow:0 0 12px rgba(57,255,20,0.3)}
+.team h4 strong{color:var(--bright-green)}
+
+/* Main columns - adjusted sizes to prevent clipping */
+.main{display:grid;grid-template-columns:300px 1fr 320px;gap:14px;align-items:start}
+.panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.02)}
+
+/* LEFT */
+.players h2{font-family:Merriweather;margin:6px 0 8px 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.chip{background:var(--glass);padding:8px 12px;border-radius:20px;font-size:13px;border:1px solid rgba(255,255,255,0.02);cursor:pointer; color:var(--muted); transition:all 0.2s ease-in-out}
+.chip.active{background:var(--bright-blue); color:#000; font-weight:700; border:none}
+.chip:hover:not(.active){background:rgba(255,255,255,0.05); color:#fff}
+.list{height:520px;overflow-y:auto;padding-right:8px; -ms-overflow-style: none;  scrollbar-width: none;}
+.list::-webkit-scrollbar { display: none; }
+.player-item{display:flex;gap:12px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:10px;border-radius:10px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.02)}
+.player-item img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+.player-meta{font-size:13px;color:var(--muted)}
+
+/* CENTER: reduced image width so right panel is visible */
+.center{display:flex;flex-direction:column;gap:10px}
+.player-preview{display:flex;gap:14px; align-items: flex-start;}
+.player-img{width:360px;height:320px;flex:0 0 360px;border-radius:6px;overflow:hidden;border:6px solid rgba(255,255,255,0.02);background:#072b3a; display: flex; justify-content: center;}
+.player-img img{height:100%;width:auto;object-fit:contain;}
+.player-info{flex:1}
+.title-box{background:linear-gradient(180deg, rgba(0,0,0,0.28), rgba(255,255,255,0.01));padding:12px;border-radius:6px;text-align:center;font-weight:700;font-size: 18px; color:var(--bright-blue)}
+.info-table{margin-top:10px;width:100%;border-collapse:collapse}
+.info-table td{padding:10px 12px}
+.info-label{color:var(--muted);width:40%}
+
+/* RIGHT: ensure full visibility with comfortable padding */
+.right{display:flex;flex-direction:column;gap:12px}
+.bid{min-height:200px;}
+.players-left{min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.big-number{font-size:48px;font-weight:700;color:var(--bright-pink)}
+
+/* Draw visual */
+.draw-visual{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));border:1px solid rgba(255,255,255,0.02);border-radius:10px;padding:12px}
+.draw-header{font-family:Merriweather;margin:0 0 10px 0;color:var(--bright-blue)}
+.draw-card{display:flex;gap:12px;align-items:center}
+.draw-img{width:64px;height:64px;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)}
+.draw-info{display:flex;flex-direction:column;gap:4px}
+.draw-name{font-weight:700}
+.spinner{width:22px;height:22px;border:3px solid rgba(255,255,255,0.2);border-top-color:var(--bright-blue);border-radius:50%;animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* BOTTOM CONTROLS: constrained width so they don't cover right panel; moved slightly up if needed */
+.bottom{position:absolute;left:60%;transform:translateX(-50%);bottom:26px;width:100%;display:flex;justify-content:center;pointer-events:none}
+.controls{pointer-events:auto;max-width:900px;width:calc(100% - 120px);display:flex;gap:14px;align-items:center;justify-content:space-between;padding:12px 18px;border-radius:50px;background:linear-gradient(90deg,var(--bright-green),var(--bright-blue));box-shadow:0 10px 25px rgba(40, 152, 137, 0.049);border:4px solid rgba(0,0,0,0.2)}
+.btn{background:rgba(67, 185, 65, 0.15);padding:10px 18px;border-radius:24px;min-width:100px;text-align:center;font-weight:600;border:2px solid rgba(255,255,255,0.1);color:#f7fbff;cursor:pointer; transition:all 0.2s ease-in-out}
+.btn:hover{background:rgba(255,255,255,0.25); border-color:rgba(255,255,255,0.15)}
+.btn.big{min-width:220px}
+.btn.circle{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px; background:var(--dark-Red); border:3px solid rgba(3, 5, 97, 0.28); color:whitesmoke; box-shadow:0 4px 15px rgba(0,0,0,0.2); font-size: 30px;font-weight: 900;}
+.btn.circle:hover{filter:brightness(1.05); transform:scale(1.02)}
+.chip{background:var(--glass);padding:8px 12px;border-radius:20px;font-size:13px;border:1px solid rgba(255,255,255,0.02);cursor:pointer; color:var(--muted); transition:all 0.2s ease-in-out}
+.chip:hover:not(.active){background:rgba(255,255,255,0.05); color:#fff}
+.chip.active{background:var(--bright-blue); color:#000; font-weight:700; border:none}
+
+
+/* Small typography tweaks */
+.muted{color:var(--muted);font-size:13px}
+
+/* scrollbars subtle */
+
+/* Responsiveness not required because we target single laptop frame */
+
+.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); align-items: center; justify-content: center; }
+.modal-card { background: var(--panel); margin: auto; padding: 25px; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; width: 90%; max-width: 1100px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; margin-bottom: 20px; }
+.modal-header .title-box { margin: 0; padding: 10px 15px; font-size: 20px; }
+.close-btn { color: var(--muted); font-size: 30px; font-weight: bold; cursor: pointer; }
+.close-btn:hover, .close-btn:focus { color: #fff; text-decoration: none; cursor: pointer; }
+.modal-body { padding: 15px 0; display: flex; flex-direction: column; gap: 20px; max-height: 550px; overflow-y: hidden;}
+
+.roster-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+.roster-column { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02)); border: 1px solid rgba(255,255,255,0.02); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; align-items: center; /* Removed scrolling from here */}
+.roster-column h4 { margin: 0 0 12px 0; color: var(--bright-green); font-family: Montserrat; font-size: 16px; text-align: center;}
+.roster-column p.muted { font-size: 13px; margin: 0; }
+.player-item-small { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; color: #eaf6ff; }
+.player-item-small img { width: 45px; height: 45px; object-fit: cover; border-radius: 7px; border: 1px solid rgba(255,255,255,0.05); }
+.player-item-small span { font-weight: 600; }
+
+.roster-players-list {
+  max-height: 275px; /* Adjusted to show ~5 players (5 * 55px) before scrolling */
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+  width: 100%;
+  padding-right: 8px;
+}
